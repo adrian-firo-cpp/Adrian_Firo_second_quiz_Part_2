@@ -97,6 +97,13 @@ int checkSums(int square[size][size]) {
 
 }
 
+//function to combine both checks
+int isSquare(int square[size][size]) {
+
+    return checkNumbers(square) && checkSums(square); //so must satisfy number and sum checks
+
+}
+
 int main() {
 
     printf("Lo Shu Magic Square\n");
@@ -167,6 +174,14 @@ int main() {
     printf("invalid diag:\n");
     printSquare(invalidDiag);
     printf("%s\n\n", checkSums(invalidDiag) ? "Valid sums" : "Invalid sums");
+
+    //temp to test isSquare
+    if (isSquare(test)) {
+        printf("isSquare valid\n");
+    }
+    else {
+        printf("isSquare invalid");
+    }
 
     return 0;
     
