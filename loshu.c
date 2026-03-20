@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 #define size 3 //defines the 3x3 square
 
@@ -104,83 +105,66 @@ int isSquare(int square[size][size]) {
 
 }
 
+//function to generate 3x3
+void generateSquare(int square[size][size]) {
+
+    int used[10] = {0}; //tracks used numbers
+
+    int count = 0;
+
+    //generate until all 9 positions filled
+    while (count < 9) {
+
+        int num = rand() % 9 + 1; //generates rand # from 1-9
+
+        //when # is unused
+        if (!used[num]) {
+
+            square [count / 3][count % 3] = num; //fill rows
+
+            used[num] = 1; //mark # as used
+            count ++;
+
+        }
+
+    }
+
+}
+
 int main() {
+
+    srand(time(NULL)); //seed RNG
 
     printf("Lo Shu Magic Square\n");
 
-    //temp to test printSquare
-    int test[size][size] = {
-        {4, 9, 2},
-        {3, 5, 7},
-        {8, 1, 7}
-    };
+    int square[size][size];
 
-    printSquare(test);
+    //gen square
+    generateSquare(square);
+    printSquare(square);
 
-    //temp to test checkNumbers
-    if (checkNumbers(test)) {
-        printf("Numbers valid\n");
+    //temp test checkNumbers
+    if (checkNumbers(square)) {
+        printf("numbers valid\n");
     }
     else {
-        printf("Numbers invlid\n");
+        printf("numbers invalid\n");
     }
 
-    //temp to test checkSums
-
-    printf("\nsums test\n\n");
-
-    int valid [size][size] = {
-        {8, 1, 6},
-        {3, 5, 7},
-        {4, 9, 2}
-    };
-
-    printf("valid square:\n");
-    printSquare(valid);
-    printf("%s\n\n", checkSums(valid) ? "Valid sums" : "Invalid sums");
-
-
-    //invalid row
-    int invalidRow[size][size] = {
-        {8, 1, 6},
-        {3, 5, 7},
-        {4, 9, 3} 
-    };
-
-    printf("invalid row:\n");
-    printSquare(invalidRow);
-    printf("%s\n\n", checkSums(invalidRow) ? "Valid sums" : "Invalid sums");
-
-
-    //invalid column
-    int invalidCol[size][size] = {
-        {8, 1, 6},
-        {3, 5, 7},
-        {4, 8, 2}  
-    };
-
-    printf("invalid row:\n");
-    printSquare(invalidCol);
-    printf("%s\n\n", checkSums(invalidCol) ? "Valid sums" : "Invalid sums");
-
-
-    //invalid diag
-    int invalidDiag[size][size] = {
-        {8, 1, 6},
-        {3, 9, 7}, 
-        {4, 9, 2}
-    };
-
-    printf("invalid diag:\n");
-    printSquare(invalidDiag);
-    printf("%s\n\n", checkSums(invalidDiag) ? "Valid sums" : "Invalid sums");
-
-    //temp to test isSquare
-    if (isSquare(test)) {
-        printf("isSquare valid\n");
+    //temp test checkSums
+    if (checkSums(square)) {
+        printf("sums valid\n");
     }
     else {
-        printf("isSquare invalid");
+        printf("sums invalid\n");
+    }
+
+    //temp test isSquare
+    if (isSquare(square)) {
+        printf("square valid\n");
+    }
+    else {
+        printf("square invalid\n");
     }
 
     return 0;
