@@ -133,39 +133,28 @@ void generateSquare(int square[size][size]) {
 
 int main() {
 
+    int square[size][size]; //3x3 grid
+    int attempts = 0; //count how many squares tested
+
     srand(time(NULL)); //seed RNG
 
     printf("Lo Shu Magic Square\n");
 
-    int square[size][size];
+    //gen square until valid result found
+    do {
 
-    //gen square
-    generateSquare(square);
+        generateSquare(square);
+        attempts++;
+
+    }
+
+    while (!isSquare(square));
+
+    //output results
+    printf("Total squares tested: %d\n", attempts);
+
+    //print square
     printSquare(square);
-
-    //temp test checkNumbers
-    if (checkNumbers(square)) {
-        printf("numbers valid\n");
-    }
-    else {
-        printf("numbers invalid\n");
-    }
-
-    //temp test checkSums
-    if (checkSums(square)) {
-        printf("sums valid\n");
-    }
-    else {
-        printf("sums invalid\n");
-    }
-
-    //temp test isSquare
-    if (isSquare(square)) {
-        printf("square valid\n");
-    }
-    else {
-        printf("square invalid\n");
-    }
 
     return 0;
     
