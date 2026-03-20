@@ -52,15 +52,60 @@ int checkNumbers(int square[size][size]) {
 
 }
 
+//function to check if all rows, columns, and diagonals sum to 15
+int checkSums(int square[size][size]) {
+
+    int sum = 15; //constant for 3x3
+
+    //check rows
+    for (int i = 0; i < size; i++) {
+
+        int rowSum = 0;
+
+        for (int j = 0; j < size; j++) {
+
+            rowSum += square[i][j];
+
+        }
+
+        if (rowSum != sum) return 0; //invalid row
+
+    }
+
+    //check columns
+    for (int j = 0; j < size; j++) {
+
+        int colSum = 0;
+
+        for (int i = 0; i < size; i++) {
+
+            colSum += square[i][j];
+
+        }
+
+        if (colSum != sum) return 0; //invalid column
+
+    }
+
+    //check diags
+    int diag1 = square[0][0] + square[1][1] + square[2][2];
+    int diag2 = square[0][2] + square[1][1] + square[2][0];
+
+    if (diag1 != sum || diag2 != sum) return 0;
+
+    return 1; //all sums valid
+
+}
+
 int main() {
 
     printf("Lo Shu Magic Square\n");
 
     //temp to test printSquare
     int test[size][size] = {
-        {8, 1, 6},
+        {4, 9, 2},
         {3, 5, 7},
-        {4, 9, 9}
+        {8, 1, 6}
     };
 
     printSquare(test);
@@ -72,6 +117,56 @@ int main() {
     else {
         printf("Numbers invlid\n");
     }
+
+    //temp to test checkSums
+
+    printf("\nsums test\n\n");
+
+    int valid [size][size] = {
+        {8, 1, 6},
+        {3, 5, 7},
+        {4, 9, 2}
+    };
+
+    printf("valid square:\n");
+    printSquare(valid);
+    printf("%s\n\n", checkSums(valid) ? "Valid sums" : "Invalid sums");
+
+
+    //invalid row
+    int invalidRow[size][size] = {
+        {8, 1, 6},
+        {3, 5, 7},
+        {4, 9, 3} 
+    };
+
+    printf("invalid row:\n");
+    printSquare(invalidRow);
+    printf("%s\n\n", checkSums(invalidRow) ? "Valid sums" : "Invalid sums");
+
+
+    //invalid column
+    int invalidCol[size][size] = {
+        {8, 1, 6},
+        {3, 5, 7},
+        {4, 8, 2}  
+    };
+
+    printf("invalid row:\n");
+    printSquare(invalidCol);
+    printf("%s\n\n", checkSums(invalidCol) ? "Valid sums" : "Invalid sums");
+
+
+    //invalid diag
+    int invalidDiag[size][size] = {
+        {8, 1, 6},
+        {3, 9, 7}, 
+        {4, 9, 2}
+    };
+
+    printf("invalid diag:\n");
+    printSquare(invalidDiag);
+    printf("%s\n\n", checkSums(invalidDiag) ? "Valid sums" : "Invalid sums");
 
     return 0;
     
