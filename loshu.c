@@ -40,30 +40,32 @@ int checkNumbers(int square[size][size]) {
 
             return 0; //option not valid
 
-        }
+            }
 
         used[num] = 1; //mark number as used
 
-    }
-
-    return 1; //numbers valid and unique
+        }
 
     }
+
+    return 1; //marks number as valid and unique
+
 }
 
 int main() {
 
     printf("Lo Shu Magic Square\n");
 
-    //temp to test if print function works
+    //temp to test printSquare
     int test[size][size] = {
         {8, 1, 6},
         {3, 5, 7},
-        {4, 9, 2}
+        {4, 9, 9}
     };
 
     printSquare(test);
 
+    //temp to test checkNumbers
     if (checkNumbers(test)) {
         printf("Numbers valid\n");
     }
